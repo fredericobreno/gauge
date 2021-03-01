@@ -1,0 +1,59 @@
+.indicator {
+  align-items: center;
+  border: var(--borderSizePx) solid black;
+  border-radius: 50%;
+  display: flex;
+  height: calc(var(--radiusPx) * 2);
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  transform: rotate(calc(var(--arcLengthDeg) / 2));
+  transform-origin: center;
+  width: calc(var(--radiusPx) * 2);
+}
+.indicator .arrow {
+  background-color: black;
+  border-radius: 12px;
+  height: var(--borderSizePx);
+  position: absolute;
+  transform: translateX(50px) rotate(var(--arrowAngleDeg, -90deg));
+  transform-origin: left;
+  width: 100px;
+}
+.indicator .marker {
+  background-color: black;
+  border-radius: 12px;
+  height: var(--borderSizePx);
+  position: absolute;
+  width: var(--markerLengthPx);
+}
+.fraction {
+  height: calc(var(--radiusPx) * 2);
+  position: absolute;
+  transform: translateX(50%) rotate(var(--fractionAngleOffsetDeg, 0deg));
+  transform-origin: left;
+  width: calc(var(--radiusPx) * 2);
+}
+.fraction::before,
+.fraction::after {
+  content: "";
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+.fraction::before {
+  background-color: var(--fractionBgColor);
+  transform: translateX(-100%) rotate(var(--fractionAngleDeg, 0deg));
+  transform-origin: right;
+}
+.fraction::after {
+  background-color: var(--fractionBgColor);
+  opacity: var(--over50, 0);
+}
+.indicator .innerCircle {
+  background: white;
+  border-radius: 50%;
+  height: var(--innerCircleSizePx, 0px);
+  position: absolute;
+  width: var(--innerCircleSizePx, 0px);
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Frederico Breno" />
+    <title>Mashup</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: white;
+        padding: 100px;
+      }
+    </style>
+    <link rel="stylesheet" href="gauge.css" />
+  </head>
+  <body>
+    <div id="indicador-1"></div>
+    <script type="module" src="./gauge.mjs"></script>
+    <script type="module">
+      import Gauge from "./gauge.mjs";
+
+      (() => {
+        const indicadores = [
+          {
+            fractions: [
+              {
+                color: "red",
+                size: "10%",
+                onClick: function () {
+                  console.log(`You clicked on ${this.color} with ${this.size}`);
+                },
+              },
+              { color: "yellow", size: "20%" },
+              { color: "green", size: "50%" },
+              { color: "blue", size: "20%" },
+            ],
+            value: "0%",
+            wrapperElId: "indicador-1",
+          },
+        ];
+
+        indicadores.forEach((indicador) => {
+          const gauge = new Gauge(indicador);
+          gauge.render();
+        });
+      })();
+    </script>
+  </body>
+</html>
