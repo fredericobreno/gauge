@@ -11,14 +11,21 @@
   transform-origin: center;
   width: calc(var(--radiusPx) * 2);
 }
-.indicator .arrow {
-  background-color: black;
-  border-radius: 12px;
+.indicator .arrowWrapper {
   height: var(--borderSizePx);
-  position: absolute;
-  transform: translateX(50px) rotate(var(--arrowAngleDeg, -90deg));
+  transform: translateX(calc(var(--innerCircleDiameterPx) / 4))
+    rotate(var(--arrowAngleDeg, -90deg));
   transform-origin: left;
-  width: 100px;
+  width: calc(var(--innerCircleDiameterPx) / 2);
+}
+.indicator .arrowWrapper::after {
+  border-top: 16px solid transparent;
+  border-bottom: 16px solid transparent;
+  border-left: 16px solid black;
+  content: "";
+  position: absolute;
+  right: 0;
+  top: calc(-16px + (var(--borderSizePx) / 2));
 }
 .indicator .marker {
   background-color: black;
@@ -53,7 +60,17 @@
 .indicator .innerCircle {
   background: white;
   border-radius: 50%;
-  height: var(--innerCircleSizePx, 0px);
+  height: var(--innerCircleDiameterPx, 0px);
   position: absolute;
-  width: var(--innerCircleSizePx, 0px);
+  width: var(--innerCircleDiameterPx, 0px);
+}
+.indicator .valueText {
+  background: white;
+  border-radius: 50%;
+  color: black;
+  font-size: var(--valueFontSize, 2.5rem);
+  padding: 10px;
+  position: absolute;
+  transform: rotate(calc((var(--arcLengthDeg) / 2) * -1));
+  z-index: 1;
 }

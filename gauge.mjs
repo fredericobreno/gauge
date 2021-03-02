@@ -1,6 +1,6 @@
 export default class Gauge {
   constructor({
-    arcLength = 300,
+    arcLength = 360,
     borderSize = 3,
     fractionLength = 60,
     fractions = [],
@@ -8,6 +8,8 @@ export default class Gauge {
     markerStep = 30,
     radius = 150,
     value = "0%",
+    valueFontSize = "2rem",
+    valueText = "",
     wrapperElId = "",
   }) {
     this.arcLength = arcLength;
@@ -18,6 +20,8 @@ export default class Gauge {
     this.markerStep = markerStep;
     this.radius = radius - borderSize / 2;
     this.value = value;
+    this.valueFontSize = valueFontSize;
+    this.valueText = valueText;
     this.wrapperEl = document.getElementById(wrapperElId);
 
     this.wrapperEl.className = "indicator";
@@ -29,7 +33,7 @@ export default class Gauge {
     );
     this.wrapperEl.style.setProperty("--arcLengthDeg", `-${this.arcLength}deg`);
     this.wrapperEl.style.setProperty(
-      "--innerCircleSizePx",
+      "--innerCircleDiameterPx",
       `${this.radius * 2 - this.fractionLength}px`
     );
 
@@ -122,12 +126,18 @@ export default class Gauge {
       this.wrapperEl.appendChild(marker);
     }
 
-    const arrowEl = document.createElement("span");
-    arrowEl.className = "arrow";
+    const arrowEl = document.createElement("div");
+    arrowEl.className = "arrowWrapper";
     arrowEl.style.setProperty(
       "--arrowAngleDeg",
       `${(this.arcLength * parseFloat(this.value)) / 100 - 90}deg`
     );
     this.wrapperEl.appendChild(arrowEl);
+
+    const valueTextEl = document.createElement("div");
+    valueTextEl.className = "valueText";
+    valueTextEl.innerHTML = this.valueText;
+    valueTextEl.style.setProperty("--valueFontSize", this.valueFontSize);
+    this.wrapperEl.appendChild(valueTextEl);
   }
 }
