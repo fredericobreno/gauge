@@ -1,4 +1,9 @@
-.indicator {
+.gauge-wrapper {
+  display: inline-block;
+  position: relative;
+  transform: rotate(calc(var(--arcLengthDeg) / 2));
+}
+.gauge {
   align-items: center;
   border: var(--borderSizePx) solid black;
   border-radius: 50%;
@@ -7,18 +12,17 @@
   justify-content: center;
   overflow: hidden;
   position: relative;
-  transform: rotate(calc(var(--arcLengthDeg) / 2));
   transform-origin: center;
   width: calc(var(--radiusPx) * 2);
 }
-.indicator .arrowWrapper {
+.gauge .arrowWrapper {
   height: var(--borderSizePx);
   transform: translateX(calc(var(--innerCircleDiameterPx) / 4))
     rotate(var(--arrowAngleDeg, -90deg));
   transform-origin: left;
   width: calc(var(--innerCircleDiameterPx) / 2);
 }
-.indicator .arrowWrapper::after {
+.gauge .arrowWrapper::after {
   border-top: 16px solid transparent;
   border-bottom: 16px solid transparent;
   border-left: 16px solid black;
@@ -27,7 +31,7 @@
   right: 0;
   top: calc(-16px + (var(--borderSizePx) / 2));
 }
-.indicator .marker {
+.gauge .marker {
   background-color: black;
   border-radius: 12px;
   height: var(--borderSizePx);
@@ -57,20 +61,24 @@
   background-color: var(--fractionBgColor);
   opacity: var(--over50, 0);
 }
-.indicator .innerCircle {
-  background: white;
+.gauge .innerCircle {
+  background: var(--bgColor);
   border-radius: 50%;
   height: var(--innerCircleDiameterPx, 0px);
   position: absolute;
   width: var(--innerCircleDiameterPx, 0px);
 }
-.indicator .valueText {
-  background: white;
-  border-radius: 50%;
+.gauge .valueText {
   color: black;
   font-size: var(--valueFontSize, 2.5rem);
-  padding: 10px;
   position: absolute;
   transform: rotate(calc((var(--arcLengthDeg) / 2) * -1));
   z-index: 1;
+}
+.maxValueText {
+  padding: 5px;
+  position: absolute;
+  right: 50%;
+  top: 50%;
+  z-index: 3;
 }

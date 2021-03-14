@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="gauge.css" />
   </head>
   <body>
-    <div id="indicador-1"></div>
+    <div id="indicador-1" class="gauge-wrapper"></div>
     <script type="module" src="./gauge.mjs"></script>
     <script type="module">
       import Gauge from "./gauge.mjs";
@@ -32,17 +32,17 @@
             fractions: [
               {
                 color: "red",
-                size: "10%",
+                size: "20%",
                 onClick: function () {
                   console.log(`You clicked on ${this.color} with ${this.size}`);
                 },
               },
-              { color: "yellow", size: "20%" },
+              { color: "yellow", size: "30%" },
               { color: "green", size: "50%" },
-              { color: "blue", size: "20%" },
+              { color: "blue", size: "0%" },
             ],
-            value: "0%",
-            valueText: "0",
+            value: 0,
+            arcLength: 270,
             wrapperElId: "indicador-1",
           },
         ];
