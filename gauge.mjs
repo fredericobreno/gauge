@@ -128,6 +128,7 @@ export default class Gauge {
           let angle = (cumulativeFractions[index] * this.arcLength) / 100;
           let radAngle = (angle - 90) * (Math.PI / 180);
 
+          maxValueTextEl.style.zIndex = 3;
           maxValueTextEl.style.transformOrigin = "bottom left";
           maxValueTextEl.style.transform = `
           translate(
@@ -201,6 +202,7 @@ export default class Gauge {
       "--arrowAngleDeg",
       `${(this.arcLength * this.value) / this.maxValue - 90}deg`
     );
+    arrowEl.style.zIndex = 2;
     this.gaugeEl.appendChild(arrowEl);
   }
 
