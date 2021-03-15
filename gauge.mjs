@@ -44,7 +44,7 @@ export default class Gauge {
     );
     this.wrapperEl.style.setProperty("--arcLengthDeg", `-${this.arcLength}deg`);
 
-    this.gaugeEl.addEventListener("mousemove", (event) => {
+    this.wrapperEl.addEventListener("mousemove", (event) => {
       const fractionIndexOnHover = this.getFractionIndexMouseIsOver(event);
 
       this.gaugeEl.querySelectorAll(".fraction").forEach((fraction, index) => {
@@ -97,6 +97,7 @@ export default class Gauge {
           .reduce((acc, cur) => acc + (cur.size * this.arcLength) / 100, 0);
 
         fractionEl.className = "fraction";
+        fractionEl.style.zIndex = 3;
         fractionEl.style.setProperty("--fractionBgColor", fraction.color);
         fractionEl.style.setProperty(
           "--fractionAngleOffsetDeg",
@@ -175,6 +176,7 @@ export default class Gauge {
   renderInnerCircle() {
     const innerCircleEl = document.createElement("div");
     innerCircleEl.className = "innerCircle";
+    innerCircleEl.style.zIndex = 4;
     this.gaugeEl.appendChild(innerCircleEl);
   }
 
@@ -184,6 +186,7 @@ export default class Gauge {
       const radAngle = (angle - 90) * (Math.PI / 180);
       const marker = document.createElement("span");
       marker.className = "marker";
+      marker.style.zIndex = 4;
       marker.style.transform = `
         translate(
           ${(this.radius - this.markerLength / 2) * Math.cos(radAngle)}px,
@@ -202,7 +205,7 @@ export default class Gauge {
       "--arrowAngleDeg",
       `${(this.arcLength * this.value) / this.maxValue - 90}deg`
     );
-    arrowEl.style.zIndex = 2;
+    arrowEl.style.zIndex = 4;
     this.gaugeEl.appendChild(arrowEl);
   }
 
@@ -211,6 +214,7 @@ export default class Gauge {
     valueTextEl.className = "valueText";
     valueTextEl.innerHTML = this.value;
     valueTextEl.style.setProperty("--valueFontSize", this.valueFontSize);
+    valueTextEl.style.zIndex = 4;
     this.gaugeEl.appendChild(valueTextEl);
   }
 
@@ -222,5 +226,9 @@ export default class Gauge {
     this.renderValue();
 
     this.wrapperEl.appendChild(this.gaugeEl);
+  }
+
+  remove() {
+    this.wrapperEl.innerHTML = "";
   }
 }

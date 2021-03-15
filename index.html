@@ -27,7 +27,7 @@
       import Gauge from "./gauge.mjs";
 
       (() => {
-        const indicadores = [
+        const gauges = [
           {
             fractions: [
               {
@@ -47,8 +47,8 @@
           },
         ];
 
-        indicadores.forEach((indicador) => {
-          const gauge = new Gauge(indicador);
+        gauges.forEach((gaugeOptions) => {
+          const gauge = new Gauge(gaugeOptions);
           gauge.render();
         });
       })();
