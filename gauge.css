@@ -1,7 +1,9 @@
 .gauge-wrapper {
   display: inline-block;
+  border: 1px solid black;
   position: relative;
-  transform: rotate(calc(var(--arcLengthDeg) / 2));
+  height: 300px;
+  width: 300px;
 }
 .gauge {
   align-items: center;
@@ -26,7 +28,7 @@
   border-top: 16px solid transparent;
   border-bottom: 16px solid transparent;
   border-left: 16px solid black;
-  content: "";
+  content: '';
   position: absolute;
   right: 0;
   top: calc(-16px + (var(--borderSizePx) / 2));
@@ -44,10 +46,11 @@
   transform: translateX(50%) rotate(var(--fractionAngleOffsetDeg, 0deg));
   transform-origin: left;
   width: calc(var(--radiusPx) * 2);
+  z-index: 3;
 }
 .fraction::before,
 .fraction::after {
-  content: "";
+  content: '';
   height: 100%;
   position: absolute;
   width: 100%;
@@ -67,18 +70,20 @@
   height: var(--innerCircleDiameterPx, 0px);
   position: absolute;
   width: var(--innerCircleDiameterPx, 0px);
+  z-index: 4;
 }
 .gauge .valueText {
   color: black;
   font-size: var(--valueFontSize, 2.5rem);
   position: absolute;
   transform: rotate(calc((var(--arcLengthDeg) / 2) * -1));
-  z-index: 1;
+  z-index: 4;
 }
 .maxValueText {
   padding: 5px;
   position: absolute;
   right: 50%;
   top: 50%;
+  transform-origin: bottom left;
   z-index: 3;
 }
